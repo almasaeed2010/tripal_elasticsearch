@@ -9,4 +9,5 @@ stylesheets[all][] = css/homepage-search-box.css
 
 dependencies[] = views
 dependencies[] = queue_ui:queue_ui
+dependencies[] = jquery_update
 files[] = tripal_elasticsearch.module

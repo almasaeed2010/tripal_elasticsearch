@@ -20,11 +20,19 @@ function tripal_elasticsearch_delete_indices_form($form, &$form_state)
         '#value' => t('Submit'),
         '#attributes' => [
             'id' => ['indices-delete-confirmation']
-        ]
+        ],
     );
 
-    drupal_add_js(drupal_get_path('module', 'tripal_elasticsearch').'/js/indices-delete-confirmation.js');
+    /*
+    $form['#attached']['js'][] = [
+        'data' => drupal_get_path('module', 'tripal_elasticsearch').'/js/indices-delete-confirmation.js',
+        'type' => 'file',
+    ];
+    */
 
+
+
+    drupal_add_js(drupal_get_path('module', 'tripal_elasticsearch').'/js/indices-delete-confirmation.js');
 
     return $form;
 }
