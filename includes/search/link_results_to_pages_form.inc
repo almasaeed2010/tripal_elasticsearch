@@ -40,6 +40,11 @@ function link_results_to_pages_form ($form, &$form_state) {
         //drupal_set_message($exception->getMessage(), 'warning');
     }
 
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => t('Submit'),
+    );
+
     return $form;
 }
 
@@ -61,7 +66,7 @@ function link_results_to_pages_form_submit ($form, &$form_state) {
     $table_name = preg_replace('/^chado_/', 'chado.', $index_name);
 
     // Delete the table and its fields in the database if that table name already exists
-    db_delete('tripal_elasticsearch_search_forms')
+    db_delete('tripal_elasticsearch_add_links')
         ->condition('table_name', $table_name)
         ->execute();
 
@@ -69,12 +74,14 @@ function link_results_to_pages_form_submit ($form, &$form_state) {
     foreach ($table_fields as $field) {
         $record['table_name'] = $table_name;
         $record['table_field'] = $field;
-        $record['page_links'] = $form_state['values']['form_fields'][$field];
+        $record['page_link'] = $form_state['values']['form_fields'][$field];
 
         drupal_write_record('tripal_elasticsearch_add_links', $record);
     }
 
     drupal_set_message(t('A search form block has been created for table '. $table_name));
+
+    $form_state['rebuild'] = true;
 }
 
 

@@ -45,6 +45,22 @@ function theme_database_table_search_results ($variables) {
         return 'No records were found.';
     }
     $rows = $search_res;
+
+    // get links for each row.
+    $sql = "SELECT * FROM tripal_elasticsearch_add_links WHERE table_name = :table_name";
+    $res = db_query($sql, [
+        ':table_name' => $table_name,
+    ]);
+    foreach ($res as $record) {
+        $field = $record->table_field;
+        $link = $record->page_link;
+        if (!empty($link)) {
+            foreach ($rows as $key=>$row) {
+                $rows[$key][$field] = l($row[$field], $link);
+            }
+        }
+    }
+
     $current_page = pager_default_initialize(count($rows), $per_page);
     $chunks = array_chunk($rows, $per_page, TRUE);
     $output = theme('table', array('header' => $header, 'rows' => $chunks[$current_page]));
