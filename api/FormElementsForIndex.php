@@ -21,7 +21,6 @@ class FormElementsForIndex
         'whitespace' => 'whitespace',
         'uax_url_email' => 'uax_url_email',
         'classic' => 'classic',
-        //'thai' => 'thao',
         'ngram' => 'ngram',
         'edge_ngram' => 'edge_ngram',
         'keyword' => 'keyword',

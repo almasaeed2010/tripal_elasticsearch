@@ -112,3 +112,14 @@ function build_search_forms_form_submit ($form, &$form_state) {
 
     drupal_set_message(t('A search form block has been created for table '. $table_name));
 }
+
+
+/*
+ * build_search_forms_form validation
+ */
+function build_search_forms_form_validate ($form, &$form_state) {
+    $table_name = $form_state['values']['indices'];
+    if (empty($table_name) OR $table_name == 'none') {
+        form_set_error('indices', t('Please select a table'));
+    }
+}

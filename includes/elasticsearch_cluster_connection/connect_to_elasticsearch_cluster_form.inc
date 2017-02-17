@@ -14,7 +14,7 @@ function connect_to_elasticsearch_cluster_form($form, &$form_state)
     $form['elasticsearch_cluster'] = array(
         '#type' => 'fieldset',
         '#title' => t('Any host from an elasticsearch cluster'),
-        '#tree' => true,
+        //'#tree' => true,
     );
     $form['elasticsearch_cluster']['host'] = array(
         '#type' => 'textfield',
@@ -37,10 +37,10 @@ function connect_to_elasticsearch_cluster_form($form, &$form_state)
  */
 function connect_to_elasticsearch_cluster_form_submit($form, &$form_state)
 {
-    variable_set('elasticsearch_hosts', array_filter($form_state['values']['elasticsearch_cluster']));
+    $hosts = [
+        $form_state['values']['host']
+    ];
+    dpm($hosts);
+    variable_set('elasticsearch_hosts', $hosts);
 
-
-    $client = Elasticsearch\ClientBuilder::create()->setHosts(variable_get('elasticsearch_hosts', array('localhost:9200')))->build();
-    $params['v'] = true;
-    //dpm($client->cat()->health($params));
 }

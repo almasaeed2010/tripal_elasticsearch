@@ -4,7 +4,7 @@ class ElasticConnection
 {
     protected $elasticsearch_hosts;
 
-    public function __construct (array $elasticsearch_hosts = ["localhost:9200"])
+    public function __construct (array $elasticsearch_hosts = ['localhost:9200'])
     {
         $this->elasticsearch_hosts = $elasticsearch_hosts;
     }

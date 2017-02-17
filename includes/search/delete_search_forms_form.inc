@@ -47,3 +47,4 @@ function delete_search_forms_form_submit ($form, &$form_state) {
     }
 
 }
+

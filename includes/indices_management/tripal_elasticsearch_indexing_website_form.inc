@@ -59,7 +59,6 @@ function tripal_elasticsearch_indexing_website_form($form, &$form_state)
  */
 function tripal_elasticsearch_indexing_website_form_validate($form, &$form_state)
 {
-
     $sql = "SELECT nid FROM node WHERE status=1 ORDER BY nid LIMIT 1;";
     $result = db_query($sql)->fetchAll();
     foreach ($result as $record) {
@@ -83,6 +82,7 @@ function tripal_elasticsearch_indexing_website_form_validate($form, &$form_state
  */
 function tripal_elasticsearch_indexing_website_form_submit($form, &$form_state)
 {
+
 
     $queue_number = $form_state['values']['queue_number'];
     $website_base_url = $form_state['values']['website_base_url'];
@@ -117,7 +117,7 @@ function tripal_elasticsearch_indexing_website_form_submit($form, &$form_state)
     ];
 
     // create a connection port
-    $connection = (new ElasticConnection(["127.0.0.1:9201"]))->make();
+    $connection = (new ElasticConnection(variable_get('elasticsearch_hosts', ['localhost:9200'])))->make();
 
     // build index
     $build_elastic_index = new BuildElasticIndex($client = $connection,
@@ -169,8 +169,3 @@ function tripal_elasticsearch_indexing_website_form_submit($form, &$form_state)
 }
 
 
-
-
-/**
- *
- */ 

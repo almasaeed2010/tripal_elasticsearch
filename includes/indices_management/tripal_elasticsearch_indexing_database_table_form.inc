@@ -160,7 +160,7 @@ function tripal_elasticsearch_indexing_database_table_form_submit($form, &$form_
         $field_mapping_types[$field] = $_POST[$field];
     }
     // create a connection port
-    $connection = (new ElasticConnection(["127.0.0.1:9201"]))->make();
+    $connection = (new ElasticConnection(variable_get('elasticsearch_hosts', ['localhost:9200'])))->make();
 
     // build index
     $build_elastic_index = new BuildElasticIndex($client = $connection,

@@ -27,7 +27,7 @@ function theme_database_table_search_results ($variables) {
     }
 
     // run elastic search
-    $connection = (new ElasticConnection(["127.0.0.1:9201"]))->make();
+    $connection = (new ElasticConnection(variable_get('elasticsearch_hosts', ['localhost:9200'])))->make();
     $elastic_search = new ElasticSearch($connection);
     $query = $elastic_search->build_search_query_from_field_content_pairs($field_content_pairs);
     $params = $elastic_search->build_table_search_params($index=$index, $type=$type, $query=$query, $from=0, $size=10000, $sort_field=$sort_field, $sort_direction=$sort_direction);
@@ -77,7 +77,7 @@ function theme_website_search_results ($variables) {
     $search_content = $variables['search_content'];
 
     // run elastic search
-    $connection = (new ElasticConnection(["127.0.0.1:9201"]))->make();
+    $connection = (new ElasticConnection(variable_get('elasticsearch_hosts', ['localhost:9200'])))->make();
     $elastic_search = new ElasticSearch($connection);
     $params = $elastic_search->build_website_search_params($index = 'website', $type = 'website', $search_content = $search_content, $from = 0, $size = 1000);
 

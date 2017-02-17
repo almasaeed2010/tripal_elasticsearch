@@ -96,7 +96,7 @@ function delete_indices_page()
 function build_search_forms_page ()
 {
     // create a connection port
-    // $connection = (new ElasticConnection(["127.0.0.1:9201"]))->make();
+    // $connection = (new ElasticConnection(variable_get('elasticsearch_hosts', ['localhost:9200'])))->make();
     return drupal_get_form ('build_search_forms_form');
 
     /*
@@ -130,7 +130,7 @@ function link_results_to_pages_page ()
 function alter_search_forms_page ()
 {
     // create a connection port
-    $connection = (new ElasticConnection(["127.0.0.1:9201"]))->make();
+    $connection = (new ElasticConnection(variable_get('elasticsearch_hosts', ['localhost:9200'])))->make();
     if ($connection) {
         return drupal_get_form ('alter_search_forms_form');
     } else {
@@ -147,7 +147,7 @@ function alter_search_forms_page ()
 function delete_search_forms_page ()
 {
     // create a connection port
-    $connection = (new ElasticConnection(["127.0.0.1:9201"]))->make();
+    $connection = (new ElasticConnection(variable_get('elasticsearch_hosts', ['localhost:9200'])))->make();
     if ($connection) {
         return drupal_get_form ('delete_search_forms_form');
     } else {
